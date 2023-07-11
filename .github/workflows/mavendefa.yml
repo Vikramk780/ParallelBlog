@@ -37,11 +37,9 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Spark Extent Report
-        path: test-output/SparkReport/Index.html
-    - name: Set Artifact Download URL
-      id: download_url
-      run: |
-        echo "DOWNLOAD_URL=https://github.com/${{ github.repository }}/actions/artifacts/${{ github.run_id }}/Spark%20Extent%20Report" >> $GITHUB_ENV
-    - name: Print Download URL
-      run: |
-        echo "Download URL: ${{ env.DOWNLOAD_URL }}"
+        path: test-output/SparkReport
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        personal_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: test-output/SparkReport
