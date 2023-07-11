@@ -29,3 +29,12 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+    - name: Generate Spark Extent Report
+      run: |
+        # Execute your Spark job and generate the Extent Report
+        # Save the report to a known location within the workspace
+    - name: Archive Extent Report
+      uses: actions/upload-artifact@v2
+      with:
+        name: Spark Extent Report
+        path: test-output/SparkReport/Index.html
