@@ -38,14 +38,10 @@ jobs:
       with:
         name: Spark Extent Report
         path: test-output/SparkReport/Index.html
-    - name: Get Artifact Download Link
-      id: artifact
-      uses: actions/github-script@v4
-      with:
-        script: |
-          const response = await github.actions.createArtifactDownloadUrl({
-            artifact_name: 'Spark Extent Report',
-            repository: context.repo,
-            token: ${{ secrets.GITHUB_TOKEN }}
-          });
-          console.log(response.data.download_url);
+    - name: Get Artifact Download URL
+      id: download_url
+      run: |
+        echo "::set-output name=download_url::$(echo ${{ github.event.repository.html_url }}/actions/artifacts/${{ github.run_id }}/Spark%20Extent%20Report)"
+    - name: Print Download URL
+      run: |
+        echo "Download URL: ${{ steps.download_url.outputs.download_url }}"
