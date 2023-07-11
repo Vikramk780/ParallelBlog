@@ -38,10 +38,10 @@ jobs:
       with:
         name: Spark Extent Report
         path: test-output/SparkReport/Index.html
-    - name: Get Artifact Download URL
+    - name: Set Artifact Download URL
       id: download_url
       run: |
-        echo "::set-output name=download_url::$(echo ${{ github.event.repository.html_url }}/actions/artifacts/${{ github.run_id }}/Spark%20Extent%20Report)"
+        echo "DOWNLOAD_URL=https://github.com/${{ github.repository }}/actions/artifacts/${{ github.run_id }}/Spark%20Extent%20Report" >> $GITHUB_ENV
     - name: Print Download URL
       run: |
-        echo "Download URL: ${{ steps.download_url.outputs.download_url }}"
+        echo "Download URL: ${{ env.DOWNLOAD_URL }}"
